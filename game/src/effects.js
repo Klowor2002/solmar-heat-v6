@@ -46,6 +46,14 @@ export class Effects {
     }
   }
 
+  // How many motes are alive right now — a cheap health check the
+  // debug readout can quote to prove bursts actually fired.
+  aliveCount() {
+    let n = 0;
+    for (let i = 0; i < POOL_SIZE; i++) if (this.life[i] > 0) n++;
+    return n;
+  }
+
   sparks(x, y, z, n = 10) { this.burst(x, y, z, n, 0xffc46b, 7, 3, 0.4); }
   debris(x, y, z, n = 12) { this.burst(x, y, z, n, 0x8a7f96, 5, 5, 0.7); }
   sparkle(x, y, z, n = 8) { this.burst(x, y, z, n, 0xffe97a, 2.5, 3, 0.6); }

@@ -49,6 +49,7 @@ export function sfxShoot() {
 }
 
 export function sfxCash() { beep(880, 0.09, 'square', 0.1); beep(1320, 0.14, 'square', 0.1, 0.08); }
+export function sfxClick() { beep(520, 0.05, 'square', 0.07); }
 export function sfxHorn() { beep(196, 0.35, 'sawtooth', 0.14); beep(147, 0.35, 'sawtooth', 0.1); }
 export function sfxPickup() { beep(660, 0.08, 'sine', 0.12); beep(990, 0.12, 'sine', 0.12, 0.07); }
 export function sfxMissionDone() { [523, 659, 784, 1046].forEach((f, i) => beep(f, 0.16, 'triangle', 0.13, i * 0.11)); }

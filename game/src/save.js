@@ -13,8 +13,10 @@ export function loadSave() {
     const data = JSON.parse(raw);
     if (typeof data !== 'object' || data === null) return null;
     return {
-      money: Number(data.money) || 0,
-      missionsDone: Number(data.missionsDone) || 0,
+      money: Math.max(0, Number(data.money) || 0),
+      // Clamp the story progress into the real range: a hand-edited or
+      // stale save must never point the mission giver past the last job.
+      missionsDone: Math.min(8, Math.max(0, Number(data.missionsDone) || 0)),
       tokens: Array.isArray(data.tokens) ? data.tokens.map(Boolean).slice(0, 10) : [],
       storyDone: Boolean(data.storyDone),
       pos: data.pos && isFinite(data.pos.x) && isFinite(data.pos.z)

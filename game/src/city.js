@@ -16,6 +16,14 @@ import { rng, randRange, randPick } from './utils.js';
 export const BLOCK_PITCH = 40;
 export const ROAD_HALF = 6;              // half the road width
 export const CITY_EDGE = 200;            // last road centreline
+
+// True when a coordinate sits on a road centreline. Traffic and the
+// mission placer both think in these lines: a marker or a spawn point
+// snapped to a multiple of the pitch is guaranteed to be on asphalt,
+// never inside a building — the invariant the whole layout rests on.
+export function isRoadLine(v) {
+  return Math.round(v / BLOCK_PITCH) * BLOCK_PITCH === Math.round(v);
+}
 export const colliders = [];             // {x, z, r} circles, buildings only
 
 const buildingPalette = [0x8f7f9e, 0xa08bb0, 0x7d6f92, 0xb59a8a, 0x6f7f9e, 0x9e8b7d, 0x87789f, 0x5f6f8f];

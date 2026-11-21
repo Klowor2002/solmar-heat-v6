@@ -53,6 +53,15 @@ export function dist2d(ax, az, bx, bz) {
   return Math.sqrt(dx * dx + dz * dz);
 }
 
+// The squared form, for the hot loops that only compare a distance
+// against a threshold and never need the actual length — traffic
+// braking and pickup collection both ask "closer than X?" hundreds of
+// times a frame, and the square root is the expensive way to answer.
+export function dist2dSq(ax, az, bx, bz) {
+  const dx = ax - bx, dz = az - bz;
+  return dx * dx + dz * dz;
+}
+
 // Input: one keyboard/mouse state object for the whole game. Modules ask
 // "is KeyW down" or consume one-shot presses ("was KeyM just hit") instead
 // of each wiring their own listeners and fighting over events.
